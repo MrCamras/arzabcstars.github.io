@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Звёзды Telegram — arzabc</title>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   MATERIAL DESIGN 3 — Dark Gold Theme
+   ═══════════════════════════════════════ */
+:root {
+  /* MD3 Color tokens */
+  --md-primary: #F0C030;
+  --md-on-primary: #1E1A00;
+  --md-primary-container: #2D2600;
+  --md-on-primary-container: #F0C030;
+  --md-secondary: #2AABEE;
+  --md-on-secondary: #003258;
+  --md-secondary-container: #00497A;
+  --md-on-secondary-container: #CBE6FF;
+  --md-surface: #141218;
+  --md-surface-variant: #1E1B26;
+  --md-on-surface: #E6E1E5;
+  --md-on-surface-variant: #CAC4D0;
+  --md-outline: #938F99;
+  --md-outline-variant: #49454F;
+  --md-error: #F2B8B5;
+  --md-background: #0F0D13;
+  --md-surface-1: #1C1B21;
+  --md-surface-2: #201F27;
+  --md-surface-3: #25232C;
+  --md-surface-4: #272530;
+  --md-surface-5: #2A2835;
+
+  /* Elevation shadows */
+  --elev-1: 0 1px 2px rgba(0,0,0,.3), 0 1px 3px 1px rgba(0,0,0,.15);
+  --elev-2: 0 1px 2px rgba(0,0,0,.3), 0 2px 6px 2px rgba(0,0,0,.15);
+  --elev-3: 0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3);
+
+  /* MD3 Shape */
+  --shape-xs: 4px;
+  --shape-sm: 8px;
+  --shape-md: 12px;
+  --shape-lg: 16px;
+  --shape-xl: 28px;
+  --shape-full: 50px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--md-background);
+  color: var(--md-on-surface);
+  font-family: 'Noto Sans', 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* ── MD3 TONAL SURFACE SCRIM ── */
+.scrim {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(240,192,48,.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(42,171,238,.04) 0%, transparent 60%);
+}
+
+/* ══════════════════════════════
+   MD3 TOP APP BAR
+   ══════════════════════════════ */
+.top-app-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px;
+  background: var(--md-surface-1);
+  box-shadow: var(--elev-2);
+  transition: background .3s;
+}
+.tab-logo {
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 700; font-size: 1.1rem;
+  color: var(--md-primary);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+  letter-spacing: .02em;
+}
+.tab-logo-icon {
+  width: 36px; height: 36px; border-radius: var(--shape-sm);
+  background: var(--md-primary-container);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+}
+/* MD3 Assist chip */
+.md3-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 32px; padding: 0 16px;
+  border-radius: var(--shape-full);
+  border: 1px solid var(--md-outline);
+  background: transparent;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: .8rem; font-weight: 500;
+  color: var(--md-on-surface-variant);
+  white-space: nowrap;
+}
+
+/* ══════════════════════════════
+   HERO
+   ══════════════════════════════ */
+.hero {
+  position: relative; z-index: 1;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 88px 24px 56px;
+}
+
+/* MD3 Suggestion chip as badge */
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 32px; padding: 0 12px 0 8px;
+  border-radius: var(--shape-full);
+  background: var(--md-primary-container);
+  color: var(--md-on-primary-container);
+  font-size: .78rem; font-weight: 500;
+  margin-bottom: 32px;
+  animation: md-fade-up .5s ease both;
+}
+.hero-badge-icon {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--md-primary);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .65rem;
+}
+
+/* MD3 Display typography */
+.hero-display {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: clamp(2.8rem, 8vw, 5.6rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  margin-bottom: 16px;
+  animation: md-fade-up .55s .08s ease both;
+}
+.hero-display .primary { color: var(--md-primary); }
+.hero-display .outlined {
+  -webkit-text-stroke: 2px var(--md-primary);
+  color: transparent;
+}
+
+/* MD3 Body Large */
+.hero-body {
+  font-size: 1rem; font-weight: 400;
+  color: var(--md-on-surface-variant);
+  max-width: 460px; margin: 0 auto 40px;
+  animation: md-fade-up .55s .15s ease both;
+}
+.hero-body strong { color: var(--md-on-surface); font-weight: 500; }
+
+/* ── MD3 Card (Filled) — price strip ── */
+.price-card {
+  display: flex; align-items: stretch;
+  background: var(--md-surface-3);
+  border-radius: var(--shape-xl);
+  box-shadow: var(--elev-2);
+  margin-bottom: 48px;
+  overflow: hidden;
+  animation: md-fade-up .55s .22s ease both;
+}
+.pc-item {
+  padding: 20px 28px; text-align: center; position: relative;
+  flex: 1;
+}
+.pc-item + .pc-item::before {
+  content: ''; position: absolute; left: 0; top: 16%; height: 68%;
+  width: 1px; background: var(--md-outline-variant);
+}
+.pc-val {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 1.7rem; font-weight: 700;
+  color: var(--md-primary); line-height: 1;
+}
+.pc-lbl {
+  font-size: .72rem; font-weight: 500;
+  color: var(--md-on-surface-variant); margin-top: 4px;
+  letter-spacing: .04em; text-transform: uppercase;
+}
+
+/* ── MD3 ACTION BUTTONS in hero ── */
+.hero-actions {
+  display: flex; align-items: stretch; justify-content: center;
+  gap: 12px; flex-wrap: wrap;
+  animation: md-fade-up .55s .3s ease both;
+}
+
+/* MD3 Filled button */
+.md3-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 0 24px; height: 56px;
+  border-radius: var(--shape-full);
+  font-family: 'Noto Sans', sans-serif;
+  font-size: .9rem; font-weight: 500;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: box-shadow .2s, filter .2s;
+  position: relative; overflow: hidden;
+  letter-spacing: .01em;
+}
+/* ripple state layer */
+.md3-btn::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  background: currentColor; opacity: 0;
+  transition: opacity .2s;
+}
+.md3-btn:hover::after { opacity: .08; }
+.md3-btn:active::after { opacity: .12; }
+
+.md3-btn-filled {
+  background: var(--md-secondary);
+  color: var(--md-on-secondary);
+  box-shadow: var(--elev-2);
+  padding: 0 32px; height: 60px; font-size: .95rem;
+}
+.md3-btn-filled:hover { box-shadow: var(--elev-3); }
+
+.md3-btn-tonal {
+  background: var(--md-surface-variant);
+  color: var(--md-on-surface-variant);
+}
+.md3-btn-tonal:hover { background: var(--md-surface-4); color: var(--md-on-surface); }
+
+.md3-btn-outlined {
+  background: transparent;
+  color: var(--md-primary);
+  border: 1px solid var(--md-outline);
+}
+.md3-btn-outlined:hover { background: rgba(240,192,48,.08); border-color: var(--md-primary); }
+
+.btn-icon {
+  width: 24px; height: 24px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .95rem; flex-shrink: 0;
+}
+.btn-text-block { text-align: left; }
+.btn-label { display: block; line-height: 1.2; }
+.btn-sublabel { display: block; font-size: .68rem; opacity: .65; font-weight: 400; margin-top: 1px; }
+
+/* ══════════════════════════════
+   MD3 CALCULATOR CARD
+   ══════════════════════════════ */
+.calc-section {
+  position: relative; z-index: 1;
+  max-width: 600px; margin: 0 auto 80px; padding: 0 16px;
+}
+
+/* MD3 Elevated Card */
+.md3-card {
+  background: var(--md-surface-1);
+  border-radius: var(--shape-xl);
+  box-shadow: var(--elev-3);
+  padding: 28px;
+}
+
+/* MD3 Title Large */
+.card-title {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 1.1rem; font-weight: 600;
+  color: var(--md-on-surface);
+  margin-bottom: 24px;
+  display: flex; align-items: center; gap: 10px;
+}
+
+/* MD3 Segmented Button */
+.md3-seg {
+  display: flex; border-radius: var(--shape-full);
+  border: 1px solid var(--md-outline-variant);
+  overflow: hidden; margin-bottom: 24px;
+}
+.md3-seg-btn {
+  flex: 1; padding: 10px 16px;
+  background: transparent;
+  border: none; border-right: 1px solid var(--md-outline-variant);
+  font-family: 'Noto Sans', sans-serif;
+  font-size: .82rem; font-weight: 500;
+  color: var(--md-on-surface-variant);
+  cursor: pointer; transition: all .2s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.md3-seg-btn:last-child { border-right: none; }
+.md3-seg-btn.active {
+  background: var(--md-secondary-container);
+  color: var(--md-on-secondary-container);
+}
+.md3-seg-btn:hover:not(.active) { background: rgba(255,255,255,.05); }
+
+/* MD3 Outlined Text Field */
+.md3-field { position: relative; margin-bottom: 20px; }
+.md3-field label {
+  display: block;
+  font-size: .75rem; font-weight: 500; letter-spacing: .04em;
+  color: var(--md-on-surface-variant);
+  margin-bottom: 6px; text-transform: uppercase;
+}
+.md3-field input {
+  width: 100%;
+  background: var(--md-surface-variant);
+  border: none;
+  border-bottom: 2px solid var(--md-outline-variant);
+  border-radius: var(--shape-md) var(--shape-md) 0 0;
+  padding: 16px 20px;
+  font-size: 1.2rem; font-weight: 600;
+  font-family: 'Noto Sans', sans-serif;
+  color: var(--md-primary);
+  outline: none;
+  transition: border-color .2s;
+  -moz-appearance: textfield;
+}
+.md3-field input::-webkit-outer-spin-button,
+.md3-field input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.md3-field input:focus { border-bottom-color: var(--md-primary); }
+.md3-field input.err { border-bottom-color: var(--md-error); }
+
+/* MD3 Result surface */
+.md3-result {
+  display: flex; justify-content: space-between; align-items: center;
+  background: var(--md-primary-container);
+  border-radius: var(--shape-lg);
+  padding: 16px 20px; margin-bottom: 16px;
+}
+.res-label {
+  font-size: .8rem; font-weight: 500; letter-spacing: .04em;
+  color: var(--md-on-primary-container); opacity: .8;
+  text-transform: uppercase;
+}
+.res-value {
+  font-size: 1.5rem; font-weight: 700;
+  color: var(--md-on-primary-container);
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.errtxt {
+  font-size: .78rem; color: var(--md-error);
+  min-height: 18px; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 4px;
+}
+
+/* MD3 FAB-style buy button */
+.btn-buy {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 18px;
+  background: var(--md-primary);
+  color: var(--md-on-primary);
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 600; font-size: .95rem;
+  border: none; border-radius: var(--shape-lg);
+  cursor: pointer; text-decoration: none;
+  box-shadow: var(--elev-2);
+  transition: box-shadow .2s, filter .15s;
+  position: relative; overflow: hidden;
+  letter-spacing: .02em;
+}
+.btn-buy::after {
+  content: ''; position: absolute; inset: 0;
+  background: var(--md-on-primary); opacity: 0; transition: opacity .2s;
+}
+.btn-buy:hover { box-shadow: var(--elev-3); }
+.btn-buy:hover::after { opacity: .08; }
+.btn-buy:active::after { opacity: .14; }
+
+/* ══════════════════════════════
+   MD3 FEATURES — Cards grid
+   ══════════════════════════════ */
+.feats-section {
+  position: relative; z-index: 1;
+  max-width: 860px; margin: 0 auto 80px; padding: 0 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+}
+
+/* MD3 Outlined Card */
+.feat-card {
+  background: var(--md-surface-1);
+  border: 1px solid var(--md-outline-variant);
+  border-radius: var(--shape-xl);
+  padding: 24px 20px;
+  transition: background .2s, border-color .2s, box-shadow .2s;
+}
+.feat-card:hover {
+  background: var(--md-surface-2);
+  border-color: var(--md-primary);
+  box-shadow: var(--elev-2);
+}
+/* MD3 Icon container */
+.feat-ic {
+  width: 48px; height: 48px;
+  border-radius: var(--shape-md);
+  background: var(--md-primary-container);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; margin-bottom: 16px;
+}
+.feat-title {
+  font-size: .9rem; font-weight: 600;
+  color: var(--md-on-surface); margin-bottom: 6px;
+}
+.feat-body {
+  font-size: .8rem; color: var(--md-on-surface-variant); line-height: 1.55;
+}
+
+/* ══════════════════════════════
+   FOOTER
+   ══════════════════════════════ */
+footer {
+  position: relative; z-index: 1;
+  text-align: center; padding: 28px 24px;
+  border-top: 1px solid var(--md-outline-variant);
+  color: var(--md-on-surface-variant); font-size: .78rem;
+}
+footer a { color: var(--md-primary); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* ── ANIMATIONS ── */
+@keyframes md-fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .top-app-bar { padding: 0 16px; }
+  .hero { padding: 80px 16px 48px; }
+  .hero-display { font-size: 2.6rem; }
+  .price-card { flex-direction: column; }
+  .pc-item + .pc-item::before { top: 0; left: 10%; height: 1px; width: 80%; }
+  .hero-actions { gap: 8px; }
+  .md3-btn-filled { height: 52px; padding: 0 22px; font-size: .88rem; }
+  .md3-btn { height: 50px; padding: 0 18px; }
+  .md3-card { padding: 20px 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="scrim"></div>
+
+<!-- ══════════════════════════════
+     🔧 НАСТРОЙКИ — МЕНЯЙ ЗДЕСЬ
+     ══════════════════════════════ -->
+<script>
+  const PRICE = 1.35;   // 💲 рублей за одну звезду
+  const MIN   = 50;     // ⭐ минимальный заказ
+
+  const LINKS = {
+    dm:      "https://t.me/arzabc",      // ✈️ личные сообщения
+    reviews: "https://t.me/arzabcrev",   // 💬 отзывы
+    channel: "https://t.me/nft252",      // 📢 канал
+  };
+</script>
+
+<!-- TOP APP BAR -->
+<header class="top-app-bar">
+  <a class="tab-logo" href="#">
+    <div class="tab-logo-icon">⭐</div>
+    arzabc
+  </a>
+  <div class="md3-chip">⭐ от 50 звёзд</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+
+  <div class="hero-badge">
+    <div class="hero-badge-icon">⭐</div>
+    Официальные звёзды Telegram
+  </div>
+
+  <h1 class="hero-display">
+    Покупай<br>
+    <span class="primary">Звёзды</span><br>
+    <span class="outlined">Telegram</span>
+  </h1>
+
+  <p class="hero-body">
+    Быстро. Надёжно. Без лишних слов.<br>
+    <strong>Минимум 50 звёзд</strong> — лучший курс от <strong>arzabc</strong>
+  </p>
+
+  <!-- Price card -->
+  <div class="price-card">
+    <div class="pc-item">
+      <div class="pc-val" id="heroPrice">1.35₽</div>
+      <div class="pc-lbl">за одну звезду</div>
+    </div>
+    <div class="pc-item">
+      <div class="pc-val">50+</div>
+      <div class="pc-lbl">минимум звёзд</div>
+    </div>
+    <div class="pc-item">
+      <div class="pc-val">⚡</div>
+      <div class="pc-lbl">моментально</div>
+    </div>
+  </div>
+
+  <!-- Action buttons -->
+  <div class="hero-actions">
+
+    <a class="md3-btn md3-btn-filled" id="btnDm" href="#" target="_blank">
+      <div class="btn-icon">✈️</div>
+      <div class="btn-text-block">
+        <span class="btn-label">Написать в ЛС</span>
+        <span class="btn-sublabel">@arzabc</span>
+      </div>
+    </a>
+
+    <a class="md3-btn md3-btn-tonal" id="btnRev" href="#" target="_blank">
+      <div class="btn-icon">💬</div>
+      <div class="btn-text-block">
+        <span class="btn-label">Отзывы</span>
+        <span class="btn-sublabel">убедись сам</span>
+      </div>
+    </a>
+
+    <a class="md3-btn md3-btn-outlined" id="btnCh" href="#" target="_blank">
+      <div class="btn-icon">📢</div>
+      <div class="btn-text-block">
+        <span class="btn-label">Канал</span>
+        <span class="btn-sublabel">новости & акции</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="calc-section">
+  <div class="md3-card">
+    <div class="card-title">🧮 Калькулятор стоимости</div>
+
+    <!-- MD3 Segmented button -->
+    <div class="md3-seg">
+      <button class="md3-seg-btn active" id="tStar" onclick="setTab('s')">
+        ✅ ⭐ Ввести звёзды
+      </button>
+      <button class="md3-seg-btn" id="tRub" onclick="setTab('r')">
+        ₽ Ввести рубли
+      </button>
+    </div>
+
+    <div class="md3-field" id="fStar">
+      <label>Количество звёзд ⭐</label>
+      <input type="number" id="iStar" value="100" min="1" placeholder="50">
+    </div>
+    <div class="md3-field" id="fRub" style="display:none">
+      <label>Сумма в рублях ₽</label>
+      <input type="number" id="iRub" value="135" min="1" step="0.01" placeholder="67.50">
+    </div>
+
+    <div class="md3-result">
+      <span class="res-label" id="crLbl">Итого к оплате</span>
+      <span class="res-value" id="crVal">135.00 ₽</span>
+    </div>
+
+    <div class="errtxt" id="errTxt"></div>
+
+    <a class="btn-buy" id="buyBtn" href="#" target="_blank">
+      ✈️ Купить звёзды через Telegram
+    </a>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="feats-section">
+  <div class="feat-card">
+    <div class="feat-ic">⚡</div>
+    <div class="feat-title">Моментально</div>
+    <div class="feat-body">Звёзды поступают сразу после подтверждения оплаты — без ожидания</div>
+  </div>
+  <div class="feat-card">
+    <div class="feat-ic">🔒</div>
+    <div class="feat-title">Безопасно</div>
+    <div class="feat-body">Сотни довольных клиентов. Читай отзывы — убедись сам</div>
+  </div>
+  <div class="feat-card">
+    <div class="feat-ic">💰</div>
+    <div class="feat-title">Лучшая цена</div>
+    <div class="feat-body">Курс <strong id="featPrice">1.35₽</strong> за звезду — дешевле чем напрямую в Telegram</div>
+  </div>
+  <div class="feat-card">
+    <div class="feat-ic">🤝</div>
+    <div class="feat-title">Поддержка 24/7</div>
+    <div class="feat-body">На связи всегда. Пиши в личку — отвечу быстро и помогу</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  Звёзды Telegram ·
+  <a id="fDm"  href="#" target="_blank">@arzabc</a> ·
+  <a id="fRev" href="#" target="_blank">Отзывы</a> ·
+  <a id="fCh"  href="#" target="_blank">Канал</a>
+</footer>
+
+<script>
+// Apply links
+document.getElementById('btnDm').href  = LINKS.dm;
+document.getElementById('btnRev').href = LINKS.reviews;
+document.getElementById('btnCh').href  = LINKS.channel;
+document.getElementById('fDm').href    = LINKS.dm;
+document.getElementById('fRev').href   = LINKS.reviews;
+document.getElementById('fCh').href    = LINKS.channel;
+
+// Hero values
+document.getElementById('heroPrice').textContent = PRICE.toFixed(2) + '₽';
+document.getElementById('featPrice').textContent = PRICE.toFixed(2) + '₽';
+
+// Tabs
+let tab = 's';
+function setTab(t) {
+  tab = t;
+  document.getElementById('fStar').style.display = t==='s' ? '' : 'none';
+  document.getElementById('fRub').style.display  = t==='r' ? '' : 'none';
+  document.getElementById('tStar').classList.toggle('active', t==='s');
+  document.getElementById('tRub').classList.toggle('active',  t==='r');
+  // update checkmark
+  document.getElementById('tStar').textContent = (t==='s' ? '✅ ' : '') + '⭐ Ввести звёзды';
+  document.getElementById('tRub').textContent  = (t==='r' ? '✅ ' : '') + '₽ Ввести рубли';
+  calc();
+}
+
+// Calculator
+const iStar  = document.getElementById('iStar');
+const iRub   = document.getElementById('iRub');
+const crLbl  = document.getElementById('crLbl');
+const crVal  = document.getElementById('crVal');
+const errTxt = document.getElementById('errTxt');
+const buyBtn = document.getElementById('buyBtn');
+
+function tgLink(stars, rub) {
+  return LINKS.dm + '?text=' + encodeURIComponent(`Хочу купить ${stars} звёзд Telegram\nСумма: ${rub} ₽`);
+}
+
+function calc() {
+  errTxt.textContent = '';
+  iStar.classList.remove('err');
+  iRub.classList.remove('err');
+  let stars, rub;
+
+  if (tab === 's') {
+    stars = parseInt(iStar.value) || 0;
+    rub   = (stars * PRICE).toFixed(2);
+    crLbl.textContent = 'Итого к оплате';
+    if (stars > 0 && stars < MIN) {
+      iStar.classList.add('err');
+      errTxt.textContent = `⚠️ Минимальный заказ — ${MIN} звёзд`;
+      crVal.textContent = '—';
+    } else {
+      crVal.textContent = stars >= MIN ? rub + ' ₽' : '—';
+    }
+  } else {
+    rub   = parseFloat(iRub.value) || 0;
+    stars = Math.floor(rub / PRICE);
+    const minRub = (MIN * PRICE).toFixed(2);
+    crLbl.textContent = 'Вы получите';
+    if (rub > 0 && stars < MIN) {
+      iRub.classList.add('err');
+      errTxt.textContent = `⚠️ Минимум ${minRub} ₽ = ${MIN} звёзд`;
+      crVal.textContent = '—';
+    } else {
+      crVal.textContent = stars >= MIN ? '⭐ ' + stars + ' звёзд' : '—';
+    }
+  }
+
+  const ok = stars >= MIN;
+  buyBtn.style.opacity       = ok ? '' : '.38';
+  buyBtn.style.pointerEvents = ok ? '' : 'none';
+  buyBtn.href = ok ? tgLink(stars, (stars * PRICE).toFixed(2)) : '#';
+}
+
+iStar.addEventListener('input', calc);
+iRub.addEventListener('input', calc);
+calc();
+</script>
+</body>
+</html>
