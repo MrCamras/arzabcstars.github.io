@@ -3,685 +3,790 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Звёзды Telegram — arzabc</title>
-<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>arzabc — Звёзды & Накрутка</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════
-   MATERIAL DESIGN 3 — Dark Gold Theme
-   ═══════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   🔧 НАСТРОЙКИ
+   ══════════════════════════════════════════ */
+/* Курс звёзд и минимум — менять здесь */
+/* const PRICE = 1.35 и const MIN = 50 — в JS внизу */
+
+/* Ссылки — менять здесь */
+/* const LINKS = {...} — в JS внизу */
+
+/* ══════════════════════════════════════════
+   MD3 — TELEGRAM DARK BLUE THEME
+   ══════════════════════════════════════════ */
 :root {
-  /* MD3 Color tokens */
-  --md-primary: #F0C030;
-  --md-on-primary: #1E1A00;
-  --md-primary-container: #2D2600;
-  --md-on-primary-container: #F0C030;
-  --md-secondary: #2AABEE;
-  --md-on-secondary: #003258;
-  --md-secondary-container: #00497A;
-  --md-on-secondary-container: #CBE6FF;
-  --md-surface: #141218;
-  --md-surface-variant: #1E1B26;
-  --md-on-surface: #E6E1E5;
-  --md-on-surface-variant: #CAC4D0;
-  --md-outline: #938F99;
-  --md-outline-variant: #49454F;
-  --md-error: #F2B8B5;
-  --md-background: #0F0D13;
-  --md-surface-1: #1C1B21;
-  --md-surface-2: #201F27;
-  --md-surface-3: #25232C;
-  --md-surface-4: #272530;
-  --md-surface-5: #2A2835;
+  --p:    #60A8FF;   /* primary — синий */
+  --op:   #001D36;   /* on-primary */
+  --pc:   #003258;   /* primary-container */
+  --opc:  #CBE6FF;   /* on-primary-container */
+  --sec:  #4FC3F7;   /* secondary */
+  --sc:   #003548;   /* secondary-container */
+  --osc:  #B3EBFF;   /* on-secondary-container */
+  --ter:  #6DD58C;   /* tertiary — зелёный акцент */
+  --tc:   #003919;
+  --otc:  #6DD58C;
+  --bg:   #0A0F1E;   /* background */
+  --s1:   #111827;   /* surface 1 */
+  --s2:   #151E2E;   /* surface 2 */
+  --s3:   #1A2438;   /* surface 3 */
+  --sv:   #1C2333;   /* surface-variant */
+  --os:   #E2E2FF;   /* on-surface */
+  --osv:  #C2C7D0;   /* on-surface-variant */
+  --out:  #8D9199;   /* outline */
+  --outv: #2A3548;   /* outline-variant */
+  --err:  #FFB4AB;
 
-  /* Elevation shadows */
-  --elev-1: 0 1px 2px rgba(0,0,0,.3), 0 1px 3px 1px rgba(0,0,0,.15);
-  --elev-2: 0 1px 2px rgba(0,0,0,.3), 0 2px 6px 2px rgba(0,0,0,.15);
-  --elev-3: 0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3);
+  --e1: 0 1px 2px rgba(0,0,0,.4), 0 1px 3px 1px rgba(0,0,0,.2);
+  --e2: 0 1px 2px rgba(0,0,0,.4), 0 2px 6px 2px rgba(0,0,0,.2);
+  --e3: 0 4px 8px 3px rgba(0,0,0,.2), 0 1px 3px rgba(0,0,0,.4);
 
-  /* MD3 Shape */
-  --shape-xs: 4px;
-  --shape-sm: 8px;
-  --shape-md: 12px;
-  --shape-lg: 16px;
-  --shape-xl: 28px;
-  --shape-full: 50px;
+  --xs:4px; --sm:8px; --md:12px; --lg:16px; --xl:28px; --full:50px;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--md-background);
-  color: var(--md-on-surface);
-  font-family: 'Noto Sans', 'Roboto', sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  overflow-x: hidden;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--os);
+  font-family:'Noto Sans',sans-serif;
+  font-size:16px;line-height:1.5;
+  overflow-x:hidden;
 }
 
-/* ── MD3 TONAL SURFACE SCRIM ── */
-.scrim {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+/* ── atmospheric bg ── */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   background:
-    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(240,192,48,.06) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(42,171,238,.04) 0%, transparent 60%);
+    radial-gradient(ellipse 70% 55% at 15% 5%, rgba(96,168,255,.07) 0%,transparent 60%),
+    radial-gradient(ellipse 55% 45% at 85% 90%, rgba(79,195,247,.05) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 35% at 50% 50%, rgba(109,213,140,.03) 0%,transparent 70%);
 }
 
 /* ══════════════════════════════
-   MD3 TOP APP BAR
+   TOP APP BAR
    ══════════════════════════════ */
-.top-app-bar {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  height: 64px;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 24px;
-  background: var(--md-surface-1);
-  box-shadow: var(--elev-2);
-  transition: background .3s;
+.app-bar{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;
+  background:rgba(10,15,30,.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--outv);
 }
-.tab-logo {
-  font-family: 'Noto Sans', sans-serif;
-  font-weight: 700; font-size: 1.1rem;
-  color: var(--md-primary);
-  text-decoration: none;
-  display: flex; align-items: center; gap: 10px;
-  letter-spacing: .02em;
+.bar-logo{
+  display:flex;align-items:center;gap:10px;
+  text-decoration:none;
 }
-.tab-logo-icon {
-  width: 36px; height: 36px; border-radius: var(--shape-sm);
-  background: var(--md-primary-container);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem;
+.bar-logo-icon{
+  width:36px;height:36px;border-radius:var(--md);
+  background:var(--pc);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;
 }
-/* MD3 Assist chip */
-.md3-chip {
-  display: inline-flex; align-items: center; gap: 6px;
-  height: 32px; padding: 0 16px;
-  border-radius: var(--shape-full);
-  border: 1px solid var(--md-outline);
-  background: transparent;
-  font-family: 'Noto Sans', sans-serif;
-  font-size: .8rem; font-weight: 500;
-  color: var(--md-on-surface-variant);
-  white-space: nowrap;
+.bar-logo-text{
+  font-weight:700;font-size:1.05rem;
+  color:var(--p);letter-spacing:.02em;
 }
+.bar-actions{display:flex;gap:8px}
+.bar-chip{
+  display:inline-flex;align-items:center;gap:5px;
+  height:32px;padding:0 12px;
+  border-radius:var(--full);
+  font-size:.75rem;font-weight:500;
+  text-decoration:none;
+  border:1px solid var(--outv);
+  color:var(--osv);
+  transition:all .2s;
+}
+.bar-chip:hover{border-color:var(--p);color:var(--p);background:rgba(96,168,255,.08)}
+.bar-chip.primary{background:var(--pc);color:var(--opc);border-color:transparent}
+.bar-chip.primary:hover{background:rgba(96,168,255,.25)}
+
+/* ══════════════════════════════
+   LAYOUT
+   ══════════════════════════════ */
+.page{position:relative;z-index:1;padding-top:64px}
+.section{max-width:760px;margin:0 auto;padding:56px 20px}
+.section-sm{max-width:620px;margin:0 auto;padding:48px 20px}
+
+/* ── divider ── */
+.sec-divider{height:1px;background:var(--outv);max-width:760px;margin:0 auto}
 
 /* ══════════════════════════════
    HERO
    ══════════════════════════════ */
-.hero {
-  position: relative; z-index: 1;
-  min-height: 100vh;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center;
-  padding: 88px 24px 56px;
+.hero{
+  min-height:calc(100vh - 64px);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;
+  padding:48px 20px 56px;
 }
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  height:32px;padding:0 14px 0 10px;
+  border-radius:var(--full);
+  background:var(--pc);color:var(--opc);
+  font-size:.75rem;font-weight:600;
+  margin-bottom:28px;
+  animation:up .5s ease both;
+}
+.eyebrow-dot{
+  width:16px;height:16px;border-radius:50%;
+  background:var(--p);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.55rem;
+}
+.hero-title{
+  font-size:clamp(2.8rem,8vw,5.5rem);
+  font-weight:700;line-height:1.04;
+  letter-spacing:-.025em;
+  margin-bottom:18px;
+  animation:up .5s .07s ease both;
+}
+.hero-title .blue{color:var(--p)}
+.hero-title .out{-webkit-text-stroke:2px var(--p);color:transparent}
+.hero-sub{
+  font-size:1rem;color:var(--osv);
+  max-width:420px;margin:0 auto 40px;
+  line-height:1.65;
+  animation:up .5s .14s ease both;
+}
+.hero-sub strong{color:var(--os)}
 
-/* MD3 Suggestion chip as badge */
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  height: 32px; padding: 0 12px 0 8px;
-  border-radius: var(--shape-full);
-  background: var(--md-primary-container);
-  color: var(--md-on-primary-container);
-  font-size: .78rem; font-weight: 500;
-  margin-bottom: 32px;
-  animation: md-fade-up .5s ease both;
+/* price pill */
+.price-pill{
+  display:flex;
+  background:var(--s1);
+  border:1px solid var(--outv);
+  border-radius:var(--xl);
+  box-shadow:var(--e2);
+  overflow:hidden;
+  margin-bottom:40px;
+  animation:up .5s .21s ease both;
 }
-.hero-badge-icon {
-  width: 18px; height: 18px; border-radius: 50%;
-  background: var(--md-primary);
-  display: flex; align-items: center; justify-content: center;
-  font-size: .65rem;
+.pp-item{padding:18px 24px;text-align:center;position:relative;flex:1}
+.pp-item+.pp-item::before{
+  content:'';position:absolute;left:0;top:15%;height:70%;
+  width:1px;background:var(--outv);
 }
+.pp-val{font-size:1.55rem;font-weight:700;color:var(--p);line-height:1}
+.pp-lbl{font-size:.68rem;font-weight:500;color:var(--osv);margin-top:5px;letter-spacing:.05em;text-transform:uppercase}
 
-/* MD3 Display typography */
-.hero-display {
-  font-family: 'Noto Sans', sans-serif;
-  font-size: clamp(2.8rem, 8vw, 5.6rem);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -.02em;
-  margin-bottom: 16px;
-  animation: md-fade-up .55s .08s ease both;
+/* hero buttons */
+.hero-btns{
+  display:flex;justify-content:center;align-items:stretch;
+  gap:10px;flex-wrap:wrap;
+  animation:up .5s .28s ease both;
 }
-.hero-display .primary { color: var(--md-primary); }
-.hero-display .outlined {
-  -webkit-text-stroke: 2px var(--md-primary);
-  color: transparent;
+.hbtn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:0 22px;height:56px;
+  border-radius:var(--full);
+  font-family:'Noto Sans',sans-serif;
+  font-size:.88rem;font-weight:500;
+  text-decoration:none;border:none;cursor:pointer;
+  transition:box-shadow .2s,background .2s;
+  position:relative;overflow:hidden;
 }
-
-/* MD3 Body Large */
-.hero-body {
-  font-size: 1rem; font-weight: 400;
-  color: var(--md-on-surface-variant);
-  max-width: 460px; margin: 0 auto 40px;
-  animation: md-fade-up .55s .15s ease both;
+.hbtn::after{content:'';position:absolute;inset:0;background:currentColor;opacity:0;transition:opacity .2s}
+.hbtn:hover::after{opacity:.08}
+.hbtn-filled{
+  background:var(--p);color:var(--op);
+  box-shadow:var(--e2);height:60px;padding:0 28px;
+  font-size:.95rem;font-weight:600;
 }
-.hero-body strong { color: var(--md-on-surface); font-weight: 500; }
-
-/* ── MD3 Card (Filled) — price strip ── */
-.price-card {
-  display: flex; align-items: stretch;
-  background: var(--md-surface-3);
-  border-radius: var(--shape-xl);
-  box-shadow: var(--elev-2);
-  margin-bottom: 48px;
-  overflow: hidden;
-  animation: md-fade-up .55s .22s ease both;
-}
-.pc-item {
-  padding: 20px 28px; text-align: center; position: relative;
-  flex: 1;
-}
-.pc-item + .pc-item::before {
-  content: ''; position: absolute; left: 0; top: 16%; height: 68%;
-  width: 1px; background: var(--md-outline-variant);
-}
-.pc-val {
-  font-family: 'Noto Sans', sans-serif;
-  font-size: 1.7rem; font-weight: 700;
-  color: var(--md-primary); line-height: 1;
-}
-.pc-lbl {
-  font-size: .72rem; font-weight: 500;
-  color: var(--md-on-surface-variant); margin-top: 4px;
-  letter-spacing: .04em; text-transform: uppercase;
-}
-
-/* ── MD3 ACTION BUTTONS in hero ── */
-.hero-actions {
-  display: flex; align-items: stretch; justify-content: center;
-  gap: 12px; flex-wrap: wrap;
-  animation: md-fade-up .55s .3s ease both;
-}
-
-/* MD3 Filled button */
-.md3-btn {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 0 24px; height: 56px;
-  border-radius: var(--shape-full);
-  font-family: 'Noto Sans', sans-serif;
-  font-size: .9rem; font-weight: 500;
-  text-decoration: none; border: none; cursor: pointer;
-  transition: box-shadow .2s, filter .2s;
-  position: relative; overflow: hidden;
-  letter-spacing: .01em;
-}
-/* ripple state layer */
-.md3-btn::after {
-  content: ''; position: absolute; inset: 0; border-radius: inherit;
-  background: currentColor; opacity: 0;
-  transition: opacity .2s;
-}
-.md3-btn:hover::after { opacity: .08; }
-.md3-btn:active::after { opacity: .12; }
-
-.md3-btn-filled {
-  background: var(--md-secondary);
-  color: var(--md-on-secondary);
-  box-shadow: var(--elev-2);
-  padding: 0 32px; height: 60px; font-size: .95rem;
-}
-.md3-btn-filled:hover { box-shadow: var(--elev-3); }
-
-.md3-btn-tonal {
-  background: var(--md-surface-variant);
-  color: var(--md-on-surface-variant);
-}
-.md3-btn-tonal:hover { background: var(--md-surface-4); color: var(--md-on-surface); }
-
-.md3-btn-outlined {
-  background: transparent;
-  color: var(--md-primary);
-  border: 1px solid var(--md-outline);
-}
-.md3-btn-outlined:hover { background: rgba(240,192,48,.08); border-color: var(--md-primary); }
-
-.btn-icon {
-  width: 24px; height: 24px; border-radius: 6px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: .95rem; flex-shrink: 0;
-}
-.btn-text-block { text-align: left; }
-.btn-label { display: block; line-height: 1.2; }
-.btn-sublabel { display: block; font-size: .68rem; opacity: .65; font-weight: 400; margin-top: 1px; }
+.hbtn-filled:hover{box-shadow:var(--e3)}
+.hbtn-tonal{background:var(--s1);border:1px solid var(--outv);color:var(--osv)}
+.hbtn-tonal:hover{border-color:var(--p);color:var(--os)}
+.hbtn-outlined{background:rgba(96,168,255,.07);border:1px solid var(--out);color:var(--p)}
+.hbtn-outlined:hover{background:rgba(96,168,255,.14)}
+.hbtn-ico{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;background:rgba(255,255,255,.12)}
+.hbtn-txt .hl{display:block;line-height:1.2}
+.hbtn-txt .hs{display:block;font-size:.67rem;opacity:.6;font-weight:400;margin-top:1px}
 
 /* ══════════════════════════════
-   MD3 CALCULATOR CARD
+   SECTION HEADER
    ══════════════════════════════ */
-.calc-section {
-  position: relative; z-index: 1;
-  max-width: 600px; margin: 0 auto 80px; padding: 0 16px;
+.sec-header{margin-bottom:28px}
+.sec-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  height:28px;padding:0 10px;
+  border-radius:var(--full);
+  background:var(--pc);color:var(--opc);
+  font-size:.72rem;font-weight:600;
+  margin-bottom:10px;letter-spacing:.04em;
 }
-
-/* MD3 Elevated Card */
-.md3-card {
-  background: var(--md-surface-1);
-  border-radius: var(--shape-xl);
-  box-shadow: var(--elev-3);
-  padding: 28px;
-}
-
-/* MD3 Title Large */
-.card-title {
-  font-family: 'Noto Sans', sans-serif;
-  font-size: 1.1rem; font-weight: 600;
-  color: var(--md-on-surface);
-  margin-bottom: 24px;
-  display: flex; align-items: center; gap: 10px;
-}
-
-/* MD3 Segmented Button */
-.md3-seg {
-  display: flex; border-radius: var(--shape-full);
-  border: 1px solid var(--md-outline-variant);
-  overflow: hidden; margin-bottom: 24px;
-}
-.md3-seg-btn {
-  flex: 1; padding: 10px 16px;
-  background: transparent;
-  border: none; border-right: 1px solid var(--md-outline-variant);
-  font-family: 'Noto Sans', sans-serif;
-  font-size: .82rem; font-weight: 500;
-  color: var(--md-on-surface-variant);
-  cursor: pointer; transition: all .2s;
-  display: flex; align-items: center; justify-content: center; gap: 6px;
-}
-.md3-seg-btn:last-child { border-right: none; }
-.md3-seg-btn.active {
-  background: var(--md-secondary-container);
-  color: var(--md-on-secondary-container);
-}
-.md3-seg-btn:hover:not(.active) { background: rgba(255,255,255,.05); }
-
-/* MD3 Outlined Text Field */
-.md3-field { position: relative; margin-bottom: 20px; }
-.md3-field label {
-  display: block;
-  font-size: .75rem; font-weight: 500; letter-spacing: .04em;
-  color: var(--md-on-surface-variant);
-  margin-bottom: 6px; text-transform: uppercase;
-}
-.md3-field input {
-  width: 100%;
-  background: var(--md-surface-variant);
-  border: none;
-  border-bottom: 2px solid var(--md-outline-variant);
-  border-radius: var(--shape-md) var(--shape-md) 0 0;
-  padding: 16px 20px;
-  font-size: 1.2rem; font-weight: 600;
-  font-family: 'Noto Sans', sans-serif;
-  color: var(--md-primary);
-  outline: none;
-  transition: border-color .2s;
-  -moz-appearance: textfield;
-}
-.md3-field input::-webkit-outer-spin-button,
-.md3-field input::-webkit-inner-spin-button { -webkit-appearance: none; }
-.md3-field input:focus { border-bottom-color: var(--md-primary); }
-.md3-field input.err { border-bottom-color: var(--md-error); }
-
-/* MD3 Result surface */
-.md3-result {
-  display: flex; justify-content: space-between; align-items: center;
-  background: var(--md-primary-container);
-  border-radius: var(--shape-lg);
-  padding: 16px 20px; margin-bottom: 16px;
-}
-.res-label {
-  font-size: .8rem; font-weight: 500; letter-spacing: .04em;
-  color: var(--md-on-primary-container); opacity: .8;
-  text-transform: uppercase;
-}
-.res-value {
-  font-size: 1.5rem; font-weight: 700;
-  color: var(--md-on-primary-container);
-  font-family: 'Noto Sans', sans-serif;
-}
-
-.errtxt {
-  font-size: .78rem; color: var(--md-error);
-  min-height: 18px; margin-bottom: 14px;
-  display: flex; align-items: center; gap: 4px;
-}
-
-/* MD3 FAB-style buy button */
-.btn-buy {
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  width: 100%; padding: 18px;
-  background: var(--md-primary);
-  color: var(--md-on-primary);
-  font-family: 'Noto Sans', sans-serif;
-  font-weight: 600; font-size: .95rem;
-  border: none; border-radius: var(--shape-lg);
-  cursor: pointer; text-decoration: none;
-  box-shadow: var(--elev-2);
-  transition: box-shadow .2s, filter .15s;
-  position: relative; overflow: hidden;
-  letter-spacing: .02em;
-}
-.btn-buy::after {
-  content: ''; position: absolute; inset: 0;
-  background: var(--md-on-primary); opacity: 0; transition: opacity .2s;
-}
-.btn-buy:hover { box-shadow: var(--elev-3); }
-.btn-buy:hover::after { opacity: .08; }
-.btn-buy:active::after { opacity: .14; }
+.sec-title{font-size:1.55rem;font-weight:700;line-height:1.2;margin-bottom:8px}
+.sec-body{font-size:.92rem;color:var(--osv);line-height:1.6}
 
 /* ══════════════════════════════
-   MD3 FEATURES — Cards grid
+   STARS CALCULATOR
    ══════════════════════════════ */
-.feats-section {
-  position: relative; z-index: 1;
-  max-width: 860px; margin: 0 auto 80px; padding: 0 16px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 12px;
+.calc-card{
+  background:var(--s1);
+  border-radius:var(--xl);
+  box-shadow:var(--e3);
+  padding:28px;
+}
+/* segmented */
+.seg{
+  display:flex;
+  background:var(--sv);
+  border-radius:var(--full);
+  padding:3px;margin-bottom:24px;gap:3px;
+}
+.seg-btn{
+  flex:1;padding:9px;border-radius:var(--full);
+  font-family:'Noto Sans',sans-serif;font-size:.8rem;font-weight:500;
+  color:var(--osv);border:none;background:transparent;
+  cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:5px;
+}
+.seg-btn.active{background:var(--s1);color:var(--p);box-shadow:var(--e1)}
+.seg-btn:hover:not(.active){background:rgba(255,255,255,.04)}
+
+/* text field */
+.tf{margin-bottom:20px}
+.tf label{
+  display:block;font-size:.73rem;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;
+  color:var(--osv);margin-bottom:7px;
+}
+.tf input{
+  width:100%;
+  background:var(--sv);
+  border:none;border-bottom:2px solid var(--outv);
+  border-radius:var(--md) var(--md) 0 0;
+  padding:15px 18px;
+  font-size:1.2rem;font-weight:600;
+  font-family:'Noto Sans',sans-serif;
+  color:var(--p);outline:none;
+  transition:border-color .2s;
+  -moz-appearance:textfield;
+}
+.tf input::-webkit-outer-spin-button,.tf input::-webkit-inner-spin-button{-webkit-appearance:none}
+.tf input:focus{border-bottom-color:var(--p)}
+.tf input.err{border-bottom-color:var(--err)}
+
+/* result */
+.calc-result{
+  display:flex;justify-content:space-between;align-items:center;
+  background:var(--pc);
+  border-radius:var(--lg);
+  padding:15px 20px;margin-bottom:16px;
+}
+.cr-lbl{font-size:.75rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--opc);opacity:.75}
+.cr-val{font-size:1.45rem;font-weight:700;color:var(--opc)}
+.errtxt{font-size:.77rem;color:var(--err);min-height:18px;margin-bottom:12px}
+
+/* buy button */
+.btn-buy{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:17px;
+  background:var(--p);color:var(--op);
+  font-family:'Noto Sans',sans-serif;font-weight:600;font-size:.95rem;
+  border:none;border-radius:var(--lg);cursor:pointer;
+  text-decoration:none;box-shadow:var(--e2);
+  transition:box-shadow .2s;
+  position:relative;overflow:hidden;letter-spacing:.02em;
+}
+.btn-buy::after{content:'';position:absolute;inset:0;background:var(--op);opacity:0;transition:opacity .2s}
+.btn-buy:hover{box-shadow:var(--e3)}
+.btn-buy:hover::after{opacity:.08}
+
+/* ══════════════════════════════
+   SERVICES
+   ══════════════════════════════ */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.svc-card{
+  background:var(--s1);
+  border:1px solid var(--outv);
+  border-radius:var(--xl);
+  padding:24px;
+  transition:border-color .2s,box-shadow .2s,transform .2s;
+  cursor:default;
+}
+.svc-card:hover{
+  border-color:var(--p);
+  box-shadow:var(--e2);
+  transform:translateY(-3px);
+}
+.svc-icon-wrap{
+  width:52px;height:52px;border-radius:var(--lg);
+  background:var(--pc);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;margin-bottom:16px;
+}
+.svc-title{font-size:.95rem;font-weight:700;color:var(--os);margin-bottom:6px}
+.svc-desc{font-size:.8rem;color:var(--osv);line-height:1.6}
+.svc-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  margin-top:12px;
+  background:var(--sc);color:var(--osc);
+  padding:4px 10px;border-radius:var(--full);
+  font-size:.7rem;font-weight:600;
 }
 
-/* MD3 Outlined Card */
-.feat-card {
-  background: var(--md-surface-1);
-  border: 1px solid var(--md-outline-variant);
-  border-radius: var(--shape-xl);
-  padding: 24px 20px;
-  transition: background .2s, border-color .2s, box-shadow .2s;
+/* ══════════════════════════════
+   SOCIALS (накрутка)
+   ══════════════════════════════ */
+.socials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+.soc-card{
+  background:var(--s1);
+  border:1px solid var(--outv);
+  border-radius:var(--xl);
+  padding:20px 16px;
+  text-align:center;
+  transition:border-color .2s,transform .2s,box-shadow .2s;
 }
-.feat-card:hover {
-  background: var(--md-surface-2);
-  border-color: var(--md-primary);
-  box-shadow: var(--elev-2);
+.soc-card:hover{border-color:var(--p);transform:translateY(-3px);box-shadow:var(--e2)}
+.soc-icon{font-size:2rem;margin-bottom:10px;display:block}
+.soc-name{font-size:.82rem;font-weight:600;color:var(--os);margin-bottom:4px}
+.soc-types{font-size:.72rem;color:var(--osv);line-height:1.5}
+
+/* ══════════════════════════════
+   FEATURES ROW
+   ══════════════════════════════ */
+.feats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.feat{
+  background:var(--s1);border:1px solid var(--outv);
+  border-radius:var(--xl);padding:22px;
+  transition:border-color .2s,box-shadow .2s;
 }
-/* MD3 Icon container */
-.feat-ic {
-  width: 48px; height: 48px;
-  border-radius: var(--shape-md);
-  background: var(--md-primary-container);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.4rem; margin-bottom: 16px;
+.feat:hover{border-color:var(--p);box-shadow:var(--e1)}
+.feat-ico{
+  width:44px;height:44px;border-radius:var(--lg);
+  background:var(--pc);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.25rem;margin-bottom:14px;
 }
-.feat-title {
-  font-size: .9rem; font-weight: 600;
-  color: var(--md-on-surface); margin-bottom: 6px;
+.feat-t{font-size:.88rem;font-weight:700;color:var(--os);margin-bottom:5px}
+.feat-d{font-size:.78rem;color:var(--osv);line-height:1.55}
+
+/* ══════════════════════════════
+   CONTACT
+   ══════════════════════════════ */
+.contact-list{display:flex;flex-direction:column;gap:10px}
+.contact-link{
+  display:flex;align-items:center;gap:14px;
+  background:var(--s1);
+  border:1px solid var(--outv);
+  border-radius:var(--xl);padding:16px 20px;
+  text-decoration:none;
+  transition:border-color .2s,background .2s;
 }
-.feat-body {
-  font-size: .8rem; color: var(--md-on-surface-variant); line-height: 1.55;
+.contact-link:hover{border-color:var(--p);background:rgba(96,168,255,.04)}
+.cl-ico{
+  width:44px;height:44px;border-radius:var(--lg);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;flex-shrink:0;
 }
+.ico-dm{background:rgba(96,168,255,.15)}
+.ico-rev{background:rgba(79,195,247,.1)}
+.ico-ch{background:rgba(109,213,140,.1)}
+.cl-txt .ct{font-weight:600;font-size:.92rem;color:var(--os)}
+.cl-txt .cs{font-size:.75rem;color:var(--osv);margin-top:2px}
+.cl-arrow{margin-left:auto;color:var(--out);font-size:1.2rem;font-weight:300}
 
 /* ══════════════════════════════
    FOOTER
    ══════════════════════════════ */
-footer {
-  position: relative; z-index: 1;
-  text-align: center; padding: 28px 24px;
-  border-top: 1px solid var(--md-outline-variant);
-  color: var(--md-on-surface-variant); font-size: .78rem;
+footer{
+  position:relative;z-index:1;
+  text-align:center;padding:28px 20px;
+  border-top:1px solid var(--outv);
+  color:var(--osv);font-size:.78rem;
 }
-footer a { color: var(--md-primary); text-decoration: none; }
-footer a:hover { text-decoration: underline; }
+footer a{color:var(--p);text-decoration:none}
 
-/* ── ANIMATIONS ── */
-@keyframes md-fade-up {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+/* ══════════════════════════════
+   ANIMATIONS
+   ══════════════════════════════ */
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── RESPONSIVE ── */
-@media (max-width: 600px) {
-  .top-app-bar { padding: 0 16px; }
-  .hero { padding: 80px 16px 48px; }
-  .hero-display { font-size: 2.6rem; }
-  .price-card { flex-direction: column; }
-  .pc-item + .pc-item::before { top: 0; left: 10%; height: 1px; width: 80%; }
-  .hero-actions { gap: 8px; }
-  .md3-btn-filled { height: 52px; padding: 0 22px; font-size: .88rem; }
-  .md3-btn { height: 50px; padding: 0 18px; }
-  .md3-card { padding: 20px 16px; }
+/* ══════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════ */
+@media(max-width:600px){
+  .app-bar{padding:0 14px}
+  .bar-chip{display:none}
+  .bar-chip.primary{display:inline-flex}
+  .hero-title{font-size:2.6rem}
+  .price-pill{flex-direction:column}
+  .pp-item+.pp-item::before{top:0;left:10%;height:1px;width:80%}
+  .hero-btns{gap:8px}
+  .hbtn-filled{height:54px;padding:0 22px}
+  .hbtn{height:50px;padding:0 16px;font-size:.83rem}
+  .calc-card{padding:20px 16px}
+  .section,.section-sm{padding:40px 16px}
 }
 </style>
 </head>
 <body>
 
-<div class="scrim"></div>
-
 <!-- ══════════════════════════════
      🔧 НАСТРОЙКИ — МЕНЯЙ ЗДЕСЬ
      ══════════════════════════════ -->
 <script>
-  const PRICE = 1.35;   // 💲 рублей за одну звезду
-  const MIN   = 50;     // ⭐ минимальный заказ
+  const PRICE = 1.35;  // 💲 рублей за одну звезду
+  const MIN   = 50;    // ⭐ минимум звёзд
 
   const LINKS = {
-    dm:      "https://t.me/arzabc",      // ✈️ личные сообщения
-    reviews: "https://t.me/arzabcrev",   // 💬 отзывы
-    channel: "https://t.me/nft252",      // 📢 канал
+    dm:      "https://t.me/arzabc",     // ✈️ личка
+    reviews: "https://t.me/arzabcrev",  // 💬 отзывы
+    channel: "https://t.me/nft252",     // 📢 канал
   };
 </script>
 
-<!-- TOP APP BAR -->
-<header class="top-app-bar">
-  <a class="tab-logo" href="#">
-    <div class="tab-logo-icon">⭐</div>
-    arzabc
+<!-- APP BAR -->
+<header class="app-bar">
+  <a class="bar-logo" href="#">
+    <div class="bar-logo-icon">⭐</div>
+    <span class="bar-logo-text">arzabc</span>
   </a>
-  <div class="md3-chip">⭐ от 50 звёзд</div>
+  <div class="bar-actions">
+    <a class="bar-chip" id="barRev" href="#" target="_blank">💬 Отзывы</a>
+    <a class="bar-chip" id="barCh"  href="#" target="_blank">📢 Канал</a>
+    <a class="bar-chip primary" id="barDm" href="#" target="_blank">✈️ Написать</a>
+  </div>
 </header>
 
-<!-- HERO -->
-<section class="hero">
+<div class="page">
 
-  <div class="hero-badge">
-    <div class="hero-badge-icon">⭐</div>
-    Официальные звёзды Telegram
-  </div>
-
-  <h1 class="hero-display">
-    Покупай<br>
-    <span class="primary">Звёзды</span><br>
-    <span class="outlined">Telegram</span>
-  </h1>
-
-  <p class="hero-body">
-    Быстро. Надёжно. Без лишних слов.<br>
-    <strong>Минимум 50 звёзд</strong> — лучший курс от <strong>arzabc</strong>
-  </p>
-
-  <!-- Price card -->
-  <div class="price-card">
-    <div class="pc-item">
-      <div class="pc-val" id="heroPrice">1.35₽</div>
-      <div class="pc-lbl">за одну звезду</div>
+  <!-- ══ HERO ══ -->
+  <section class="hero">
+    <div class="hero-eyebrow">
+      <div class="eyebrow-dot">⭐</div>
+      Звёзды · Накрутка · Вывод
     </div>
-    <div class="pc-item">
-      <div class="pc-val">50+</div>
-      <div class="pc-lbl">минимум звёзд</div>
-    </div>
-    <div class="pc-item">
-      <div class="pc-val">⚡</div>
-      <div class="pc-lbl">моментально</div>
-    </div>
-  </div>
 
-  <!-- Action buttons -->
-  <div class="hero-actions">
+    <h1 class="hero-title">
+      Всё для<br>
+      <span class="blue">Telegram</span><br>
+      <span class="out">и соцсетей</span>
+    </h1>
 
-    <a class="md3-btn md3-btn-filled" id="btnDm" href="#" target="_blank">
-      <div class="btn-icon">✈️</div>
-      <div class="btn-text-block">
-        <span class="btn-label">Написать в ЛС</span>
-        <span class="btn-sublabel">@arzabc</span>
+    <p class="hero-sub">
+      Звёзды Telegram по <strong>1.35₽/шт</strong>, вывод звёзд с канала,
+      накрутка на Instagram, TikTok, YouTube, VK и Telegram.<br>
+      <strong>Быстро. Надёжно. 24/7.</strong>
+    </p>
+
+    <div class="price-pill">
+      <div class="pp-item">
+        <div class="pp-val">1.35₽</div>
+        <div class="pp-lbl">за звезду</div>
       </div>
-    </a>
-
-    <a class="md3-btn md3-btn-tonal" id="btnRev" href="#" target="_blank">
-      <div class="btn-icon">💬</div>
-      <div class="btn-text-block">
-        <span class="btn-label">Отзывы</span>
-        <span class="btn-sublabel">убедись сам</span>
+      <div class="pp-item">
+        <div class="pp-val">50+</div>
+        <div class="pp-lbl">минимум</div>
       </div>
-    </a>
-
-    <a class="md3-btn md3-btn-outlined" id="btnCh" href="#" target="_blank">
-      <div class="btn-icon">📢</div>
-      <div class="btn-text-block">
-        <span class="btn-label">Канал</span>
-        <span class="btn-sublabel">новости & акции</span>
+      <div class="pp-item">
+        <div class="pp-val">⚡</div>
+        <div class="pp-lbl">моментально</div>
       </div>
-    </a>
-
-  </div>
-</section>
-
-<!-- CALCULATOR -->
-<section class="calc-section">
-  <div class="md3-card">
-    <div class="card-title">🧮 Калькулятор стоимости</div>
-
-    <!-- MD3 Segmented button -->
-    <div class="md3-seg">
-      <button class="md3-seg-btn active" id="tStar" onclick="setTab('s')">
-        ✅ ⭐ Ввести звёзды
-      </button>
-      <button class="md3-seg-btn" id="tRub" onclick="setTab('r')">
-        ₽ Ввести рубли
-      </button>
     </div>
 
-    <div class="md3-field" id="fStar">
-      <label>Количество звёзд ⭐</label>
-      <input type="number" id="iStar" value="100" min="1" placeholder="50">
+    <div class="hero-btns">
+      <a class="hbtn hbtn-filled" id="heroDm" href="#" target="_blank">
+        <div class="hbtn-ico">✈️</div>
+        <div class="hbtn-txt">
+          <span class="hl">Написать в ЛС</span>
+          <span class="hs">@arzabc</span>
+        </div>
+      </a>
+      <a class="hbtn hbtn-tonal" href="#calculator">
+        <div class="hbtn-ico" style="background:rgba(96,168,255,.15)">🧮</div>
+        <div class="hbtn-txt">
+          <span class="hl">Калькулятор</span>
+          <span class="hs">посчитать цену</span>
+        </div>
+      </a>
+      <a class="hbtn hbtn-outlined" id="heroCh" href="#" target="_blank">
+        <div class="hbtn-ico" style="background:rgba(96,168,255,.1)">📢</div>
+        <div class="hbtn-txt">
+          <span class="hl">Канал</span>
+          <span class="hs">новости & акции</span>
+        </div>
+      </a>
     </div>
-    <div class="md3-field" id="fRub" style="display:none">
-      <label>Сумма в рублях ₽</label>
-      <input type="number" id="iRub" value="135" min="1" step="0.01" placeholder="67.50">
+  </section>
+
+  <div class="sec-divider"></div>
+
+  <!-- ══ CALCULATOR ══ -->
+  <section class="section-sm" id="calculator">
+    <div class="sec-header">
+      <div class="sec-chip">⭐ Звёзды Telegram</div>
+      <h2 class="sec-title">Калькулятор стоимости</h2>
+      <p class="sec-body">Введи количество звёзд или сумму в рублях</p>
     </div>
 
-    <div class="md3-result">
-      <span class="res-label" id="crLbl">Итого к оплате</span>
-      <span class="res-value" id="crVal">135.00 ₽</span>
+    <div class="calc-card">
+      <div class="seg">
+        <button class="seg-btn active" id="tS" onclick="setTab('s')">✅ ⭐ Звёзды</button>
+        <button class="seg-btn"        id="tR" onclick="setTab('r')">₽ Рубли</button>
+      </div>
+
+      <div class="tf" id="fS">
+        <label>Количество звёзд ⭐</label>
+        <input type="number" id="iS" value="100" min="1" placeholder="50">
+      </div>
+      <div class="tf" id="fR" style="display:none">
+        <label>Сумма в рублях ₽</label>
+        <input type="number" id="iR" value="135" min="1" step="0.01" placeholder="67.50">
+      </div>
+
+      <div class="calc-result">
+        <span class="cr-lbl" id="crL">Итого к оплате</span>
+        <span class="cr-val" id="crV">135.00 ₽</span>
+      </div>
+      <div class="errtxt" id="eT"></div>
+
+      <a class="btn-buy" id="buyBtn" href="#" target="_blank">
+        ✈️ Купить звёзды в Telegram
+      </a>
+    </div>
+  </section>
+
+  <div class="sec-divider"></div>
+
+  <!-- ══ SERVICES ══ -->
+  <section class="section" id="services">
+    <div class="sec-header">
+      <div class="sec-chip">🛠 Услуги</div>
+      <h2 class="sec-title">Что мы предлагаем</h2>
+      <p class="sec-body">Три направления — одно место</p>
     </div>
 
-    <div class="errtxt" id="errTxt"></div>
+    <div class="services-grid">
+      <div class="svc-card">
+        <div class="svc-icon-wrap">⭐</div>
+        <div class="svc-title">Продажа звёзд Telegram</div>
+        <div class="svc-desc">Официальные звёзды Telegram по курсу 1.35₽ за штуку. Минимум 50 штук. Поступают моментально после оплаты.</div>
+        <div class="svc-badge">от 50 шт · 1.35₽/шт</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon-wrap">💸</div>
+        <div class="svc-title">Вывод звёзд с канала</div>
+        <div class="svc-desc">Помогаем вывести накопленные звёзды с Telegram канала. Быстро, безопасно, без потерь. Пиши — обсудим условия.</div>
+        <div class="svc-badge">быстро · безопасно</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon-wrap">📈</div>
+        <div class="svc-title">Накрутка соцсетей</div>
+        <div class="svc-desc">Подписчики, просмотры, лайки, комментарии для Instagram, TikTok, YouTube, VK и Telegram.</div>
+        <div class="svc-badge">5 платформ</div>
+      </div>
+    </div>
+  </section>
 
-    <a class="btn-buy" id="buyBtn" href="#" target="_blank">
-      ✈️ Купить звёзды через Telegram
-    </a>
-  </div>
-</section>
+  <div class="sec-divider"></div>
 
-<!-- FEATURES -->
-<section class="feats-section">
-  <div class="feat-card">
-    <div class="feat-ic">⚡</div>
-    <div class="feat-title">Моментально</div>
-    <div class="feat-body">Звёзды поступают сразу после подтверждения оплаты — без ожидания</div>
-  </div>
-  <div class="feat-card">
-    <div class="feat-ic">🔒</div>
-    <div class="feat-title">Безопасно</div>
-    <div class="feat-body">Сотни довольных клиентов. Читай отзывы — убедись сам</div>
-  </div>
-  <div class="feat-card">
-    <div class="feat-ic">💰</div>
-    <div class="feat-title">Лучшая цена</div>
-    <div class="feat-body">Курс <strong id="featPrice">1.35₽</strong> за звезду — дешевле чем напрямую в Telegram</div>
-  </div>
-  <div class="feat-card">
-    <div class="feat-ic">🤝</div>
-    <div class="feat-title">Поддержка 24/7</div>
-    <div class="feat-body">На связи всегда. Пиши в личку — отвечу быстро и помогу</div>
-  </div>
-</section>
+  <!-- ══ SOCIALS ══ -->
+  <section class="section" id="socials">
+    <div class="sec-header">
+      <div class="sec-chip">📈 Накрутка</div>
+      <h2 class="sec-title">Поддерживаемые платформы</h2>
+      <p class="sec-body">Работаем с 5 крупнейшими платформами</p>
+    </div>
 
-<!-- FOOTER -->
-<footer>
-  Звёзды Telegram ·
-  <a id="fDm"  href="#" target="_blank">@arzabc</a> ·
-  <a id="fRev" href="#" target="_blank">Отзывы</a> ·
-  <a id="fCh"  href="#" target="_blank">Канал</a>
-</footer>
+    <div class="socials-grid">
+      <div class="soc-card">
+        <span class="soc-icon">📸</span>
+        <div class="soc-name">Instagram</div>
+        <div class="soc-types">Подписчики<br>Лайки · Просмотры<br>Комментарии</div>
+      </div>
+      <div class="soc-card">
+        <span class="soc-icon">🎵</span>
+        <div class="soc-name">TikTok</div>
+        <div class="soc-types">Подписчики<br>Лайки · Просмотры<br>Комментарии</div>
+      </div>
+      <div class="soc-card">
+        <span class="soc-icon">▶️</span>
+        <div class="soc-name">YouTube</div>
+        <div class="soc-types">Подписчики<br>Просмотры · Лайки<br>Комментарии</div>
+      </div>
+      <div class="soc-card">
+        <span class="soc-icon">💙</span>
+        <div class="soc-name">VK</div>
+        <div class="soc-types">Подписчики<br>Лайки · Просмотры<br>Репосты</div>
+      </div>
+      <div class="soc-card">
+        <span class="soc-icon">✈️</span>
+        <div class="soc-name">Telegram</div>
+        <div class="soc-types">Подписчики<br>Просмотры · Реакции<br>Звёзды</div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;text-align:center">
+      <a class="hbtn hbtn-filled" id="socDm" href="#" target="_blank" style="display:inline-flex">
+        <div class="hbtn-ico">✈️</div>
+        <div class="hbtn-txt">
+          <span class="hl">Заказать накрутку</span>
+          <span class="hs">написать в ЛС</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <div class="sec-divider"></div>
+
+  <!-- ══ FEATURES ══ -->
+  <section class="section">
+    <div class="sec-header">
+      <div class="sec-chip">✅ Преимущества</div>
+      <h2 class="sec-title">Почему выбирают нас</h2>
+    </div>
+    <div class="feats-row">
+      <div class="feat">
+        <div class="feat-ico">⚡</div>
+        <div class="feat-t">Моментально</div>
+        <div class="feat-d">Звёзды приходят сразу после оплаты — без ожидания</div>
+      </div>
+      <div class="feat">
+        <div class="feat-ico">🔒</div>
+        <div class="feat-t">Безопасно</div>
+        <div class="feat-d">Сотни довольных клиентов. Проверь отзывы сам</div>
+      </div>
+      <div class="feat">
+        <div class="feat-ico">💰</div>
+        <div class="feat-t">Лучшая цена</div>
+        <div class="feat-d">1.35₽ за звезду — дешевле чем напрямую в Telegram</div>
+      </div>
+      <div class="feat">
+        <div class="feat-ico">🤝</div>
+        <div class="feat-t">Поддержка 24/7</div>
+        <div class="feat-d">На связи всегда — отвечаю быстро на все вопросы</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sec-divider"></div>
+
+  <!-- ══ CONTACTS ══ -->
+  <section class="section-sm" id="contacts">
+    <div class="sec-header">
+      <div class="sec-chip">✈️ Контакты</div>
+      <h2 class="sec-title">Связаться</h2>
+      <p class="sec-body">Пиши по любому вопросу — отвечу быстро</p>
+    </div>
+
+    <div class="contact-list">
+      <a class="contact-link" id="ctaDm" href="#" target="_blank">
+        <div class="cl-ico ico-dm">✈️</div>
+        <div class="cl-txt">
+          <div class="ct">Личные сообщения</div>
+          <div class="cs">@arzabc · написать чтобы купить</div>
+        </div>
+        <div class="cl-arrow">›</div>
+      </a>
+      <a class="contact-link" id="ctaRev" href="#" target="_blank">
+        <div class="cl-ico ico-rev">💬</div>
+        <div class="cl-txt">
+          <div class="ct">Отзывы</div>
+          <div class="cs">@arzabcrev · убедись сам</div>
+        </div>
+        <div class="cl-arrow">›</div>
+      </a>
+      <a class="contact-link" id="ctaCh" href="#" target="_blank">
+        <div class="cl-ico ico-ch">📢</div>
+        <div class="cl-txt">
+          <div class="ct">Канал</div>
+          <div class="cs">@nft252 · новости и акции</div>
+        </div>
+        <div class="cl-arrow">›</div>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    arzabc · Звёзды Telegram · Накрутка соцсетей ·
+    <a id="fDm" href="#" target="_blank">@arzabc</a>
+  </footer>
+</div>
 
 <script>
-// Apply links
-document.getElementById('btnDm').href  = LINKS.dm;
-document.getElementById('btnRev').href = LINKS.reviews;
-document.getElementById('btnCh').href  = LINKS.channel;
-document.getElementById('fDm').href    = LINKS.dm;
-document.getElementById('fRev').href   = LINKS.reviews;
-document.getElementById('fCh').href    = LINKS.channel;
+// ── Links ──
+const els = {
+  barDm:  document.getElementById('barDm'),
+  barRev: document.getElementById('barRev'),
+  barCh:  document.getElementById('barCh'),
+  heroDm: document.getElementById('heroDm'),
+  heroCh: document.getElementById('heroCh'),
+  socDm:  document.getElementById('socDm'),
+  ctaDm:  document.getElementById('ctaDm'),
+  ctaRev: document.getElementById('ctaRev'),
+  ctaCh:  document.getElementById('ctaCh'),
+  fDm:    document.getElementById('fDm'),
+};
+els.barDm.href  = els.heroDm.href = els.socDm.href = els.ctaDm.href = els.fDm.href = LINKS.dm;
+els.barRev.href = els.ctaRev.href = LINKS.reviews;
+els.barCh.href  = els.heroCh.href = els.ctaCh.href = LINKS.channel;
 
-// Hero values
-document.getElementById('heroPrice').textContent = PRICE.toFixed(2) + '₽';
-document.getElementById('featPrice').textContent = PRICE.toFixed(2) + '₽';
+// ── Calculator ──
+const iS=document.getElementById('iS'), iR=document.getElementById('iR');
+const crL=document.getElementById('crL'), crV=document.getElementById('crV');
+const eT=document.getElementById('eT'),   buy=document.getElementById('buyBtn');
+let tab='s';
 
-// Tabs
-let tab = 's';
-function setTab(t) {
-  tab = t;
-  document.getElementById('fStar').style.display = t==='s' ? '' : 'none';
-  document.getElementById('fRub').style.display  = t==='r' ? '' : 'none';
-  document.getElementById('tStar').classList.toggle('active', t==='s');
-  document.getElementById('tRub').classList.toggle('active',  t==='r');
-  // update checkmark
-  document.getElementById('tStar').textContent = (t==='s' ? '✅ ' : '') + '⭐ Ввести звёзды';
-  document.getElementById('tRub').textContent  = (t==='r' ? '✅ ' : '') + '₽ Ввести рубли';
+function setTab(t){
+  tab=t;
+  document.getElementById('fS').style.display=t==='s'?'':'none';
+  document.getElementById('fR').style.display=t==='r'?'':'none';
+  document.getElementById('tS').classList.toggle('active',t==='s');
+  document.getElementById('tR').classList.toggle('active',t==='r');
+  document.getElementById('tS').innerHTML=(t==='s'?'✅ ':'')+'⭐ Звёзды';
+  document.getElementById('tR').innerHTML=(t==='r'?'✅ ':'')+'₽ Рубли';
   calc();
 }
 
-// Calculator
-const iStar  = document.getElementById('iStar');
-const iRub   = document.getElementById('iRub');
-const crLbl  = document.getElementById('crLbl');
-const crVal  = document.getElementById('crVal');
-const errTxt = document.getElementById('errTxt');
-const buyBtn = document.getElementById('buyBtn');
-
-function tgLink(stars, rub) {
-  return LINKS.dm + '?text=' + encodeURIComponent(`Хочу купить ${stars} звёзд Telegram\nСумма: ${rub} ₽`);
+function tgLink(stars,rub){
+  return LINKS.dm+'?text='+encodeURIComponent(`Хочу купить ${stars} звёзд Telegram\nСумма: ${rub} ₽`);
 }
 
-function calc() {
-  errTxt.textContent = '';
-  iStar.classList.remove('err');
-  iRub.classList.remove('err');
-  let stars, rub;
-
-  if (tab === 's') {
-    stars = parseInt(iStar.value) || 0;
-    rub   = (stars * PRICE).toFixed(2);
-    crLbl.textContent = 'Итого к оплате';
-    if (stars > 0 && stars < MIN) {
-      iStar.classList.add('err');
-      errTxt.textContent = `⚠️ Минимальный заказ — ${MIN} звёзд`;
-      crVal.textContent = '—';
-    } else {
-      crVal.textContent = stars >= MIN ? rub + ' ₽' : '—';
-    }
-  } else {
-    rub   = parseFloat(iRub.value) || 0;
-    stars = Math.floor(rub / PRICE);
-    const minRub = (MIN * PRICE).toFixed(2);
-    crLbl.textContent = 'Вы получите';
-    if (rub > 0 && stars < MIN) {
-      iRub.classList.add('err');
-      errTxt.textContent = `⚠️ Минимум ${minRub} ₽ = ${MIN} звёзд`;
-      crVal.textContent = '—';
-    } else {
-      crVal.textContent = stars >= MIN ? '⭐ ' + stars + ' звёзд' : '—';
-    }
+function calc(){
+  eT.textContent='';iS.classList.remove('err');iR.classList.remove('err');
+  let stars,rub;
+  if(tab==='s'){
+    stars=parseInt(iS.value)||0;
+    rub=(stars*PRICE).toFixed(2);
+    crL.textContent='Итого к оплате';
+    if(stars>0&&stars<MIN){iS.classList.add('err');eT.textContent=`⚠️ Минимальный заказ — ${MIN} звёзд`;crV.textContent='—';}
+    else{crV.textContent=stars>=MIN?rub+' ₽':'—';}
+  }else{
+    rub=parseFloat(iR.value)||0;
+    stars=Math.floor(rub/PRICE);
+    const mn=(MIN*PRICE).toFixed(2);
+    crL.textContent='Вы получите';
+    if(rub>0&&stars<MIN){iR.classList.add('err');eT.textContent=`⚠️ Минимум ${mn} ₽ = ${MIN} звёзд`;crV.textContent='—';}
+    else{crV.textContent=stars>=MIN?'⭐ '+stars+' звёзд':'—';}
   }
-
-  const ok = stars >= MIN;
-  buyBtn.style.opacity       = ok ? '' : '.38';
-  buyBtn.style.pointerEvents = ok ? '' : 'none';
-  buyBtn.href = ok ? tgLink(stars, (stars * PRICE).toFixed(2)) : '#';
+  const ok=stars>=MIN;
+  buy.style.opacity=ok?'':'.38';
+  buy.style.pointerEvents=ok?'':'none';
+  buy.href=ok?tgLink(stars,(stars*PRICE).toFixed(2)):'#';
 }
 
-iStar.addEventListener('input', calc);
-iRub.addEventListener('input', calc);
+iS.addEventListener('input',calc);
+iR.addEventListener('input',calc);
 calc();
+
+// ── Smooth scroll for anchor buttons ──
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  if(a.getAttribute('href').length>1){
+    a.addEventListener('click',e=>{
+      const t=document.querySelector(a.getAttribute('href'));
+      if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  }
+});
 </script>
 </body>
 </html>
